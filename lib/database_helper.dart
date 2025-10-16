@@ -76,4 +76,20 @@ $columnAge INTEGER NOT NULL
       whereArgs: [id],
     );
   }
+    // Query a specific row by ID
+  Future<Map<String, dynamic>?> queryById(int id) async {
+    final result = await _db.query(
+      table,
+      where: '$columnId = ?',
+      whereArgs: [id],
+    );
+    return result.isNotEmpty ? result.first : null;
+  }
+
+  // Delete all records in the table
+  Future<int> deleteAll() async {
+    return await _db.delete(table);
+  }
+
+
 }
